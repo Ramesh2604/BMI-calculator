@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bmi calculator</title>
+    <style>
+        body{
+            background-image: linear-gradient(to right,rgb(48, 43, 43),rgb(119, 119, 214));
+        }
+        .main{
+            width: 18rem;
+            height: 18rem;
+            margin: 3% 0 0 35%;
+            border: 2px solid black;
+            border-radius: 10px;
+            padding: 1rem 5rem;
+            background-image: linear-gradient(rgb(230, 78, 78),rgb(88, 90, 207));
+            box-shadow: 10px 10px 100px rgb(230, 78, 78);
+        }
+        h1{
+            font-size: 200%;
+            font-family: sans-serif;
+            font-weight: 900;
+        }
+        label{
+            font-size: 150%;
+        }
+        input{
+            margin: 1rem 0;
+            padding: .5rem 1.5rem;
+            border-radius: 10px;
+        }
+        button{
+            font-size: 120%;
+            margin: 1rem 5rem;
+            border-radius: 10px;
+        }
+        #rk{
+            margin: 2rem 0 0 35%;
+            background-color: yellow;
+            width: 28rem;
+            border-radius: 10px;
+            align-items: center;
+            
+        }
+    </style>
+</head>     
+    <body>
+        <div class="main">
+            <h1>BMI Calculator</h1>
+            <label>Height:</label><input type="text" name="height" id="height"><br>
+            <label>Weight:</label><input type="text" name="weight" id="weight"><br>
+            <button type="submit" value="submit" onclick="myFunction()">Submit</button><br />
+        </div>
+    <div id="rk"></div>
+    </body>
+    <script type = "text/javascript">  
+        function myFunction() {   
+         
+        let body={weight:document.getElementById('weight').value,height:document.getElementById('height').value}
+        
+        console.log(body)
+fetch("http://127.0.0.1:3000/process_post",{
+   method: 'POST',
+  headers :{ "content-type":'application/json'},
+   body:JSON.stringify(body)
+   
+
+                 }  ).then(data=>{
+                   return data.json()
+                 }).then(data1=>{ console.log(data1)
+                 document.getElementById("rk").innerHTML=JSON.stringify(data1)
+                 })}
+        </script>
+</html>
